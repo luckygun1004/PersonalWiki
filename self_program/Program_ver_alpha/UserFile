@@ -34,7 +34,7 @@ vm-lucas-final
 # 직접 접근 ip / user / pem파일 위치
 
 vm_kic_dir_db=(
-210.109.62.74 ubuntu privatekey
+1.1.1.1 ubuntu privatekey
 )
 
 # 직접 접근이 불가능한 VM들
@@ -47,7 +47,7 @@ vm-lucas-project
 # 단, 반드시 privatekey은 입력해야합니다.
 
 vm_kic_indir_db=(
-172.30.200.109 ubuntu vm-lucas-final
+1.1.1.1 ubuntu vm-lucas-final
 )
 
 #변수선언 ( ex) token="abc", Aceesskey, Hiddenkey) ↓ 아래에다가 적으면 적용됨
