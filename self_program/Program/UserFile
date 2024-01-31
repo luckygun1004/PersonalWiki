@@ -26,10 +26,10 @@ vm_oracle_name=(
 )
 
 vm_oracle_ip=(
-193.122.99.107
-129.154.214.43
-152.70.36.83
-129.154.201.228
+[ip주소]
+[ip주소]
+111.111.111.1
+111.111.111.1
 )
 
 oraclekey=/Users/lucas.1004/Desktop/sshgate/pem/id_rsa
@@ -39,16 +39,16 @@ oraclekey=/Users/lucas.1004/Desktop/sshgate/pem/id_rsa
 
 
 vm_kic_dir_name=(
-BM-yohan-kr1
-BM-yohan-kr2
+BM-kr1
+BM-kr2
 BM-TechCS
 )
 
 
 vm_kic_dir_db=(
-210.109.62.226 ubuntu private3key
-61.109.239.248 ubuntu private4key
-61.109.238.236 ubuntu privatekey
+[공인ip] ubuntu private3key
+[공인ip] ubuntu private4key
+[공인ip] ubuntu privatekey
 )
 
 vm_kic_indir_name=(
