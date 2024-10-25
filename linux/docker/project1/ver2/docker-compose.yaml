@@ -158,7 +158,7 @@ services:
  
   flask:
     build: ./flask
-    image: project1/flask
+    image: project/flask
     restart: always
     volumes:
       - ./flask/log:/usr/src/program/log
