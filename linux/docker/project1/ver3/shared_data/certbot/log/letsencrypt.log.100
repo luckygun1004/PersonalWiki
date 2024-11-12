@@ -1,0 +1,456 @@
+2024-11-12 02:02:07,808:DEBUG:certbot._internal.main:certbot version: 3.0.0
+2024-11-12 02:02:07,808:DEBUG:certbot._internal.main:Location of certbot entry point: /usr/local/bin/certbot
+2024-11-12 02:02:07,808:DEBUG:certbot._internal.main:Arguments: ['--dry-run', '--agree-tos', '--no-eff-email', '--email', 'myemail@gmail.com', '--webroot', '--webroot-path=/var/www/html', '--force-renewal', '-d', 'lucky-gun.com', '-d', 'www.lucky-gun.com']
+2024-11-12 02:02:07,808:DEBUG:certbot._internal.main:Discovered plugins: PluginsRegistry(PluginEntryPoint#manual,PluginEntryPoint#null,PluginEntryPoint#standalone,PluginEntryPoint#webroot)
+2024-11-12 02:02:07,818:DEBUG:certbot._internal.log:Root logging level set at 30
+2024-11-12 02:02:07,820:DEBUG:certbot._internal.plugins.selection:Requested authenticator webroot and installer None
+2024-11-12 02:02:07,820:DEBUG:certbot._internal.plugins.selection:Single candidate plugin: * webroot
+Description: Saves the necessary validation files to a .well-known/acme-challenge/ directory within the nominated webroot path. A separate HTTP server must be running and serving files from the webroot path. HTTP challenge only (wildcards not supported).
+Interfaces: Authenticator, Plugin
+Entry point: EntryPoint(name='webroot', value='certbot._internal.plugins.webroot:Authenticator', group='certbot.plugins')
+Initialized: <certbot._internal.plugins.webroot.Authenticator object at 0x7f37c7e03f50>
+Prep: True
+2024-11-12 02:02:07,820:DEBUG:certbot._internal.plugins.selection:Selected authenticator <certbot._internal.plugins.webroot.Authenticator object at 0x7f37c7e03f50> and installer None
+2024-11-12 02:02:07,821:INFO:certbot._internal.plugins.selection:Plugins selected: Authenticator webroot, Installer None
+2024-11-12 02:02:07,862:DEBUG:certbot._internal.main:Picked account: <Account(RegistrationResource(body=Registration(key=None, contact=(), agreement=None, status=None, terms_of_service_agreed=None, only_return_existing=None, external_account_binding=None), uri='https://acme-staging-v02.api.letsencrypt.org/acme/acct/171084843', new_authzr_uri=None, terms_of_service=None), 571bbd68d825f253302608d76d308966, Meta(creation_dt=datetime.datetime(2024, 11, 12, 2, 1, 50, tzinfo=<UTC>), creation_host='5bfd48c325fb', register_to_eff=None))>
+2024-11-12 02:02:07,863:DEBUG:acme.client:Sending GET request to https://acme-staging-v02.api.letsencrypt.org/directory.
+2024-11-12 02:02:07,864:DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): acme-staging-v02.api.letsencrypt.org:443
+2024-11-12 02:02:08,345:DEBUG:urllib3.connectionpool:https://acme-staging-v02.api.letsencrypt.org:443 "GET /directory HTTP/1.1" 200 820
+2024-11-12 02:02:08,346:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Tue, 12 Nov 2024 02:02:08 GMT
+Content-Type: application/json
+Content-Length: 820
+Connection: keep-alive
+Cache-Control: public, max-age=0, no-cache
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "YOj7l8DQSdw": "https://community.letsencrypt.org/t/adding-random-entries-to-the-directory/33417",
+  "keyChange": "https://acme-staging-v02.api.letsencrypt.org/acme/key-change",
+  "meta": {
+    "caaIdentities": [
+      "letsencrypt.org"
+    ],
+    "termsOfService": "https://letsencrypt.org/documents/LE-SA-v1.4-April-3-2024.pdf",
+    "website": "https://letsencrypt.org/docs/staging-environment/"
+  },
+  "newAccount": "https://acme-staging-v02.api.letsencrypt.org/acme/new-acct",
+  "newNonce": "https://acme-staging-v02.api.letsencrypt.org/acme/new-nonce",
+  "newOrder": "https://acme-staging-v02.api.letsencrypt.org/acme/new-order",
+  "renewalInfo": "https://acme-staging-v02.api.letsencrypt.org/draft-ietf-acme-ari-03/renewalInfo",
+  "revokeCert": "https://acme-staging-v02.api.letsencrypt.org/acme/revoke-cert"
+}
+2024-11-12 02:02:08,346:DEBUG:certbot._internal.display.obj:Notifying user: Simulating a certificate request for lucky-gun.com and www.lucky-gun.com
+2024-11-12 02:02:08,350:DEBUG:acme.client:Requesting fresh nonce
+2024-11-12 02:02:08,350:DEBUG:acme.client:Sending HEAD request to https://acme-staging-v02.api.letsencrypt.org/acme/new-nonce.
+2024-11-12 02:02:08,509:DEBUG:urllib3.connectionpool:https://acme-staging-v02.api.letsencrypt.org:443 "HEAD /acme/new-nonce HTTP/1.1" 200 0
+2024-11-12 02:02:08,509:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Tue, 12 Nov 2024 02:02:08 GMT
+Connection: keep-alive
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-staging-v02.api.letsencrypt.org/directory>;rel="index"
+Replay-Nonce: gzkFhP4EhZ1GsTLZoYQIPOdWOpY5Gobj6bCWrOZ_QF0NYI3PyMs
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+
+2024-11-12 02:02:08,509:DEBUG:acme.client:Storing nonce: gzkFhP4EhZ1GsTLZoYQIPOdWOpY5Gobj6bCWrOZ_QF0NYI3PyMs
+2024-11-12 02:02:08,510:DEBUG:acme.client:JWS payload:
+b'{\n  "identifiers": [\n    {\n      "type": "dns",\n      "value": "lucky-gun.com"\n    },\n    {\n      "type": "dns",\n      "value": "www.lucky-gun.com"\n    }\n  ]\n}'
+2024-11-12 02:02:08,512:DEBUG:acme.client:Sending POST request to https://acme-staging-v02.api.letsencrypt.org/acme/new-order:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS1zdGFnaW5nLXYwMi5hcGkubGV0c2VuY3J5cHQub3JnL2FjbWUvYWNjdC8xNzEwODQ4NDMiLCAibm9uY2UiOiAiZ3prRmhQNEVoWjFHc1RMWm9ZUUlQT2RXT3BZNUdvYmo2YkNXck9aX1FGME5ZSTNQeU1zIiwgInVybCI6ICJodHRwczovL2FjbWUtc3RhZ2luZy12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL25ldy1vcmRlciJ9",
+  "signature": "rEYjW4t9-WcbMK3T-4-L0WSo9CmNiz--BTjaCUcpERGgWHWatnr01HpOXS5e5dY7Jv9oI_mEavrSP9dNBUe_COdPJeYeMA8fCmpe2ZJK2n0hdKQ1GqOlZzd32hFczgnkl5K56WKnnmujqzGFRLn9hc7agKZGEoJkIBvPWOOEimH2_3exDv4jpUwoct28DCNrYpmiVSodU7TaloGXjj7cA_und_A-xtkTFy2idAjxTkXrG8ebBU814YwD0u8MZhAtn3NYB_lI7NRsIq3RnxyDXtBm6EkgGrpe_s4Rfs4OWg_GAgRyKqacOUgNrbRawuW8ashWhmpLVzwhr1Jtl3Of5g",
+  "payload": "ewogICJpZGVudGlmaWVycyI6IFsKICAgIHsKICAgICAgInR5cGUiOiAiZG5zIiwKICAgICAgInZhbHVlIjogImx1Y2t5LWd1bi5jb20iCiAgICB9LAogICAgewogICAgICAidHlwZSI6ICJkbnMiLAogICAgICAidmFsdWUiOiAid3d3Lmx1Y2t5LWd1bi5jb20iCiAgICB9CiAgXQp9"
+}
+2024-11-12 02:02:08,699:DEBUG:urllib3.connectionpool:https://acme-staging-v02.api.letsencrypt.org:443 "POST /acme/new-order HTTP/1.1" 201 499
+2024-11-12 02:02:08,699:DEBUG:acme.client:Received response:
+HTTP 201
+Server: nginx
+Date: Tue, 12 Nov 2024 02:02:08 GMT
+Content-Type: application/json
+Content-Length: 499
+Connection: keep-alive
+Boulder-Requester: 171084843
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-staging-v02.api.letsencrypt.org/directory>;rel="index"
+Location: https://acme-staging-v02.api.letsencrypt.org/acme/order/171084843/20425887623
+Replay-Nonce: 6LMdfWKR17t7Dwqm8ebOtWVefESXbcPN9Tw_OkoiiuvK_DFEKRk
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "status": "pending",
+  "expires": "2024-11-19T02:02:08Z",
+  "identifiers": [
+    {
+      "type": "dns",
+      "value": "lucky-gun.com"
+    },
+    {
+      "type": "dns",
+      "value": "www.lucky-gun.com"
+    }
+  ],
+  "authorizations": [
+    "https://acme-staging-v02.api.letsencrypt.org/acme/authz-v3/14868249283",
+    "https://acme-staging-v02.api.letsencrypt.org/acme/authz-v3/14868249293"
+  ],
+  "finalize": "https://acme-staging-v02.api.letsencrypt.org/acme/finalize/171084843/20425887623"
+}
+2024-11-12 02:02:08,700:DEBUG:acme.client:Storing nonce: 6LMdfWKR17t7Dwqm8ebOtWVefESXbcPN9Tw_OkoiiuvK_DFEKRk
+2024-11-12 02:02:08,700:DEBUG:acme.client:JWS payload:
+b''
+2024-11-12 02:02:08,701:DEBUG:acme.client:Sending POST request to https://acme-staging-v02.api.letsencrypt.org/acme/authz-v3/14868249283:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS1zdGFnaW5nLXYwMi5hcGkubGV0c2VuY3J5cHQub3JnL2FjbWUvYWNjdC8xNzEwODQ4NDMiLCAibm9uY2UiOiAiNkxNZGZXS1IxN3Q3RHdxbThlYk90V1ZlZkVTWGJjUE45VHdfT2tvaWl1dktfREZFS1JrIiwgInVybCI6ICJodHRwczovL2FjbWUtc3RhZ2luZy12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2F1dGh6LXYzLzE0ODY4MjQ5MjgzIn0",
+  "signature": "f5QHRCR4U31nbnbQ3sYh8CTCHqPCPmK9_L2IsifLZmffpJWzA7QhabVoEhJIqlg9q0mVVD12qIW4Fw0Dob2AMWUExPfIEbKDfKQYRrh4lx2NO2ivWvMEjTuA0zz0Jo4y21KRxSCjSJaV5dH1lXcoPVuINsZALZOByS4PTN3pz7RmSQozZBwK2Q2IRd25m2PMlkiZfOxSJpRgvWJUw82amkEtI4VFMste65cEf8vGAYxW94huKHoowilEwChSpZbdYcMMGyWfLAQhLR0i7vFf2Ogsv3eRnpcX_v1MfGzk0CFcxC734m4gnnkTo73MaBCmXBXHLcaYZeeM1K_Aa9UHYw",
+  "payload": ""
+}
+2024-11-12 02:02:08,866:DEBUG:urllib3.connectionpool:https://acme-staging-v02.api.letsencrypt.org:443 "POST /acme/authz-v3/14868249283 HTTP/1.1" 200 818
+2024-11-12 02:02:08,866:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Tue, 12 Nov 2024 02:02:08 GMT
+Content-Type: application/json
+Content-Length: 818
+Connection: keep-alive
+Boulder-Requester: 171084843
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-staging-v02.api.letsencrypt.org/directory>;rel="index"
+Replay-Nonce: gzkFhP4EDiXfjM8Wq0z7VL6RlKDY8WBUPgtPa2VT0X-eB1iocAE
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "identifier": {
+    "type": "dns",
+    "value": "lucky-gun.com"
+  },
+  "status": "pending",
+  "expires": "2024-11-19T02:02:08Z",
+  "challenges": [
+    {
+      "type": "http-01",
+      "url": "https://acme-staging-v02.api.letsencrypt.org/acme/chall-v3/14868249283/076NKA",
+      "status": "pending",
+      "token": "A6CVQAMCq5S1xB1CB-K1i1R95XTRP73X5kKmpC81-HU"
+    },
+    {
+      "type": "dns-01",
+      "url": "https://acme-staging-v02.api.letsencrypt.org/acme/chall-v3/14868249283/YwbSUQ",
+      "status": "pending",
+      "token": "A6CVQAMCq5S1xB1CB-K1i1R95XTRP73X5kKmpC81-HU"
+    },
+    {
+      "type": "tls-alpn-01",
+      "url": "https://acme-staging-v02.api.letsencrypt.org/acme/chall-v3/14868249283/dJ94fg",
+      "status": "pending",
+      "token": "A6CVQAMCq5S1xB1CB-K1i1R95XTRP73X5kKmpC81-HU"
+    }
+  ]
+}
+2024-11-12 02:02:08,866:DEBUG:acme.client:Storing nonce: gzkFhP4EDiXfjM8Wq0z7VL6RlKDY8WBUPgtPa2VT0X-eB1iocAE
+2024-11-12 02:02:08,866:DEBUG:acme.client:JWS payload:
+b''
+2024-11-12 02:02:08,867:DEBUG:acme.client:Sending POST request to https://acme-staging-v02.api.letsencrypt.org/acme/authz-v3/14868249293:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS1zdGFnaW5nLXYwMi5hcGkubGV0c2VuY3J5cHQub3JnL2FjbWUvYWNjdC8xNzEwODQ4NDMiLCAibm9uY2UiOiAiZ3prRmhQNEVEaVhmak04V3EwejdWTDZSbEtEWThXQlVQZ3RQYTJWVDBYLWVCMWlvY0FFIiwgInVybCI6ICJodHRwczovL2FjbWUtc3RhZ2luZy12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2F1dGh6LXYzLzE0ODY4MjQ5MjkzIn0",
+  "signature": "uVxqPRb4-JbPN6-6dPBBSu52J6jeVmo5Lg4F74kR2y6gKfGm3FNLTTaVxT55T8Vvu-dA_C9iQ6q-fxtatyy3Aj1HYpag9X5X7fxutmMQkowO3p2ouKpNfo1FMESnXfxVtpKXbQyMm9d-5ciJ7o85KPYsSVBwPXVXXEsJdm07DOu1kSeF2dy_eMRBmoJTVFcv_yqBI7zaZ3mtBGDpcNtBxznWucg36_xhnHVTeeghnRuJKdq6HmEcx7r2dwrZrrH0fbtYrfrdnMQVdxruamZkKi7xJbL_tYWENA1rX7HyJJXTARldVaXBwaWimpp6fprwxSwadsI_InW_n5PgFly2qA",
+  "payload": ""
+}
+2024-11-12 02:02:09,030:DEBUG:urllib3.connectionpool:https://acme-staging-v02.api.letsencrypt.org:443 "POST /acme/authz-v3/14868249293 HTTP/1.1" 200 822
+2024-11-12 02:02:09,031:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Tue, 12 Nov 2024 02:02:08 GMT
+Content-Type: application/json
+Content-Length: 822
+Connection: keep-alive
+Boulder-Requester: 171084843
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-staging-v02.api.letsencrypt.org/directory>;rel="index"
+Replay-Nonce: gzkFhP4ED0cFkX3TATB5oYagjCtFC5SvtPgGXOhM4KwYCGIxW40
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "identifier": {
+    "type": "dns",
+    "value": "www.lucky-gun.com"
+  },
+  "status": "pending",
+  "expires": "2024-11-19T02:02:08Z",
+  "challenges": [
+    {
+      "type": "http-01",
+      "url": "https://acme-staging-v02.api.letsencrypt.org/acme/chall-v3/14868249293/U7wyXQ",
+      "status": "pending",
+      "token": "vnmgrVPfbaDjz-Amc70iWkw2UcaljxKdX2iBuCZU2o8"
+    },
+    {
+      "type": "dns-01",
+      "url": "https://acme-staging-v02.api.letsencrypt.org/acme/chall-v3/14868249293/7YOVtA",
+      "status": "pending",
+      "token": "vnmgrVPfbaDjz-Amc70iWkw2UcaljxKdX2iBuCZU2o8"
+    },
+    {
+      "type": "tls-alpn-01",
+      "url": "https://acme-staging-v02.api.letsencrypt.org/acme/chall-v3/14868249293/jYATuw",
+      "status": "pending",
+      "token": "vnmgrVPfbaDjz-Amc70iWkw2UcaljxKdX2iBuCZU2o8"
+    }
+  ]
+}
+2024-11-12 02:02:09,031:DEBUG:acme.client:Storing nonce: gzkFhP4ED0cFkX3TATB5oYagjCtFC5SvtPgGXOhM4KwYCGIxW40
+2024-11-12 02:02:09,031:INFO:certbot._internal.auth_handler:Performing the following challenges:
+2024-11-12 02:02:09,031:INFO:certbot._internal.auth_handler:http-01 challenge for lucky-gun.com
+2024-11-12 02:02:09,031:INFO:certbot._internal.auth_handler:http-01 challenge for www.lucky-gun.com
+2024-11-12 02:02:09,031:INFO:certbot._internal.plugins.webroot:Using the webroot path /var/www/html for all unmatched domains.
+2024-11-12 02:02:09,031:DEBUG:certbot._internal.plugins.webroot:Creating root challenges validation dir at /var/www/html/.well-known/acme-challenge
+2024-11-12 02:02:09,032:DEBUG:certbot._internal.plugins.webroot:Creating root challenges validation dir at /var/www/html/.well-known/acme-challenge
+2024-11-12 02:02:09,032:DEBUG:certbot._internal.plugins.webroot:Attempting to save validation to /var/www/html/.well-known/acme-challenge/A6CVQAMCq5S1xB1CB-K1i1R95XTRP73X5kKmpC81-HU
+2024-11-12 02:02:09,033:DEBUG:certbot._internal.plugins.webroot:Attempting to save validation to /var/www/html/.well-known/acme-challenge/vnmgrVPfbaDjz-Amc70iWkw2UcaljxKdX2iBuCZU2o8
+2024-11-12 02:02:09,033:DEBUG:acme.client:JWS payload:
+b'{}'
+2024-11-12 02:02:09,034:DEBUG:acme.client:Sending POST request to https://acme-staging-v02.api.letsencrypt.org/acme/chall-v3/14868249283/076NKA:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS1zdGFnaW5nLXYwMi5hcGkubGV0c2VuY3J5cHQub3JnL2FjbWUvYWNjdC8xNzEwODQ4NDMiLCAibm9uY2UiOiAiZ3prRmhQNEVEMGNGa1gzVEFUQjVvWWFnakN0RkM1U3Z0UGdHWE9oTTRLd1lDR0l4VzQwIiwgInVybCI6ICJodHRwczovL2FjbWUtc3RhZ2luZy12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2NoYWxsLXYzLzE0ODY4MjQ5MjgzLzA3Nk5LQSJ9",
+  "signature": "jbqith7RXhITCia-vj3kaQDFj4pFMy4ZB3pmi540E11Y5r5AAg8W_yBcQf35UHmcDzeb8HJNtVVuMMqUUQSiEp8Zny_6LbdhC8Y2xwK5V3wb4krbrTT7kY9aPmX7UMcvGLm6a5aTXbod2U412DyJietoqkpg1GcN4CM4XXE8yTvmerWwdBE9gJWnWbuMmjwKNF0n4jGIg4Q1He0_5OeYcb-gamOPGyqUV6l4SaPplg6QWWLQfrC0zUiqhuN5U-hbyG-seT0qIOVaMUpDuMa3Oy7j9JIkwWoL8ixFfPcdegYENAfq2o6fZrKlvCdkWeqV7M_EyF4iglK37g-WDFL-UQ",
+  "payload": "e30"
+}
+2024-11-12 02:02:09,201:DEBUG:urllib3.connectionpool:https://acme-staging-v02.api.letsencrypt.org:443 "POST /acme/chall-v3/14868249283/076NKA HTTP/1.1" 200 194
+2024-11-12 02:02:09,202:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Tue, 12 Nov 2024 02:02:09 GMT
+Content-Type: application/json
+Content-Length: 194
+Connection: keep-alive
+Boulder-Requester: 171084843
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-staging-v02.api.letsencrypt.org/directory>;rel="index", <https://acme-staging-v02.api.letsencrypt.org/acme/authz-v3/14868249283>;rel="up"
+Location: https://acme-staging-v02.api.letsencrypt.org/acme/chall-v3/14868249283/076NKA
+Replay-Nonce: 6LMdfWKR15QPIw3i93GJl7OElqMM-hdVRfQqKK97t9JIJRwecvw
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "type": "http-01",
+  "url": "https://acme-staging-v02.api.letsencrypt.org/acme/chall-v3/14868249283/076NKA",
+  "status": "pending",
+  "token": "A6CVQAMCq5S1xB1CB-K1i1R95XTRP73X5kKmpC81-HU"
+}
+2024-11-12 02:02:09,202:DEBUG:acme.client:Storing nonce: 6LMdfWKR15QPIw3i93GJl7OElqMM-hdVRfQqKK97t9JIJRwecvw
+2024-11-12 02:02:09,202:DEBUG:acme.client:JWS payload:
+b'{}'
+2024-11-12 02:02:09,203:DEBUG:acme.client:Sending POST request to https://acme-staging-v02.api.letsencrypt.org/acme/chall-v3/14868249293/U7wyXQ:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS1zdGFnaW5nLXYwMi5hcGkubGV0c2VuY3J5cHQub3JnL2FjbWUvYWNjdC8xNzEwODQ4NDMiLCAibm9uY2UiOiAiNkxNZGZXS1IxNVFQSXczaTkzR0psN09FbHFNTS1oZFZSZlFxS0s5N3Q5SklKUndlY3Z3IiwgInVybCI6ICJodHRwczovL2FjbWUtc3RhZ2luZy12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2NoYWxsLXYzLzE0ODY4MjQ5MjkzL1U3d3lYUSJ9",
+  "signature": "BpDCbRH9hGHMMeeLc6jif1Gow4iMB4Dr0z7gKWG7gbQ3ZEYM1ZLF_N0RBKcVKgAdfWBRRLu4EmDJk1wUObDpyQrZjfkzg91jwMCI5fyGuVJgkRtw7aGwyT4VMGsA3OAoe_GvRVZo0JukVrdKglhzeghlYkJHDOuK8ycDxeKdpcn4ldJ75A0pu6gVV8NpuUzAH-7hcbmuDrD9NTZAgy9Ax5JDeK2uWF_RKp068DNQNpmrxdMIUZFPfQ2bJHyPFvOvMk0o5FU5femgBsxfR-lPExcC91g8jphbGH7ie5qfAtzUdPsWKtMMNCtrAtZN72pAp3bWzTqULxBsTjuU1pkpYQ",
+  "payload": "e30"
+}
+2024-11-12 02:02:09,372:DEBUG:urllib3.connectionpool:https://acme-staging-v02.api.letsencrypt.org:443 "POST /acme/chall-v3/14868249293/U7wyXQ HTTP/1.1" 200 194
+2024-11-12 02:02:09,373:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Tue, 12 Nov 2024 02:02:09 GMT
+Content-Type: application/json
+Content-Length: 194
+Connection: keep-alive
+Boulder-Requester: 171084843
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-staging-v02.api.letsencrypt.org/directory>;rel="index", <https://acme-staging-v02.api.letsencrypt.org/acme/authz-v3/14868249293>;rel="up"
+Location: https://acme-staging-v02.api.letsencrypt.org/acme/chall-v3/14868249293/U7wyXQ
+Replay-Nonce: gzkFhP4EuBAht9xBJCmbRK-gxnb2nFZOxkpR-JI4mG11I8K_3Ns
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "type": "http-01",
+  "url": "https://acme-staging-v02.api.letsencrypt.org/acme/chall-v3/14868249293/U7wyXQ",
+  "status": "pending",
+  "token": "vnmgrVPfbaDjz-Amc70iWkw2UcaljxKdX2iBuCZU2o8"
+}
+2024-11-12 02:02:09,373:DEBUG:acme.client:Storing nonce: gzkFhP4EuBAht9xBJCmbRK-gxnb2nFZOxkpR-JI4mG11I8K_3Ns
+2024-11-12 02:02:09,373:INFO:certbot._internal.auth_handler:Waiting for verification...
+2024-11-12 02:02:10,373:DEBUG:acme.client:JWS payload:
+b''
+2024-11-12 02:02:10,375:DEBUG:acme.client:Sending POST request to https://acme-staging-v02.api.letsencrypt.org/acme/authz-v3/14868249283:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS1zdGFnaW5nLXYwMi5hcGkubGV0c2VuY3J5cHQub3JnL2FjbWUvYWNjdC8xNzEwODQ4NDMiLCAibm9uY2UiOiAiZ3prRmhQNEV1QkFodDl4QkpDbWJSSy1neG5iMm5GWk94a3BSLUpJNG1HMTFJOEtfM05zIiwgInVybCI6ICJodHRwczovL2FjbWUtc3RhZ2luZy12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2F1dGh6LXYzLzE0ODY4MjQ5MjgzIn0",
+  "signature": "p0Pieo_UHu9f6pZjrFQkyH_6PW1PcbXBah4JRSaNQntkx7NVB2qNZHsbFCW2x3cHZXofJAcWKwDyJpNQs1gKzfnvgzCATai8Z_IWYfCvts1fFhHg4LLPGHAOhFo-uPE2lZJbgwjkCd1SCSktHzK8hpundiaNE4FepQEJOnjZYH8rOiNJeoYn-EpB61FY7FYxzB1Mo60y_dpPxQkMHdzwNxjEo4HvnVxROwWR6ZKBy7n1ipPXpTy_cfzPxzFeiP3ZeTWZvT-rgwuTlCx9khysE8lF3YOhZzlpL1hXcWrkkgaR3VspKSN8XW3PtmOwgQ-9X2laXsiH0sk9o2uTnwdpGQ",
+  "payload": ""
+}
+2024-11-12 02:02:10,539:DEBUG:urllib3.connectionpool:https://acme-staging-v02.api.letsencrypt.org:443 "POST /acme/authz-v3/14868249283 HTTP/1.1" 200 1030
+2024-11-12 02:02:10,540:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Tue, 12 Nov 2024 02:02:10 GMT
+Content-Type: application/json
+Content-Length: 1030
+Connection: keep-alive
+Boulder-Requester: 171084843
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-staging-v02.api.letsencrypt.org/directory>;rel="index"
+Replay-Nonce: 6LMdfWKRv-HS7iZz2VFKSzHzfJq2-eCEuFrrLEg0o7ovHJ7XqTA
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "identifier": {
+    "type": "dns",
+    "value": "lucky-gun.com"
+  },
+  "status": "invalid",
+  "expires": "2024-11-19T02:02:08Z",
+  "challenges": [
+    {
+      "type": "http-01",
+      "url": "https://acme-staging-v02.api.letsencrypt.org/acme/chall-v3/14868249283/076NKA",
+      "status": "invalid",
+      "validated": "2024-11-12T02:02:09Z",
+      "error": {
+        "type": "urn:ietf:params:acme:error:connection",
+        "detail": "210.109.55.157: Fetching http://lucky-gun.com/.well-known/acme-challenge/A6CVQAMCq5S1xB1CB-K1i1R95XTRP73X5kKmpC81-HU: Connection refused",
+        "status": 400
+      },
+      "token": "A6CVQAMCq5S1xB1CB-K1i1R95XTRP73X5kKmpC81-HU",
+      "validationRecord": [
+        {
+          "url": "http://lucky-gun.com/.well-known/acme-challenge/A6CVQAMCq5S1xB1CB-K1i1R95XTRP73X5kKmpC81-HU",
+          "hostname": "lucky-gun.com",
+          "port": "80",
+          "addressesResolved": [
+            "210.109.55.157"
+          ],
+          "addressUsed": "210.109.55.157"
+        }
+      ]
+    }
+  ]
+}
+2024-11-12 02:02:10,540:DEBUG:acme.client:Storing nonce: 6LMdfWKRv-HS7iZz2VFKSzHzfJq2-eCEuFrrLEg0o7ovHJ7XqTA
+2024-11-12 02:02:10,540:DEBUG:acme.client:JWS payload:
+b''
+2024-11-12 02:02:10,541:DEBUG:acme.client:Sending POST request to https://acme-staging-v02.api.letsencrypt.org/acme/authz-v3/14868249293:
+{
+  "protected": "eyJhbGciOiAiUlMyNTYiLCAia2lkIjogImh0dHBzOi8vYWNtZS1zdGFnaW5nLXYwMi5hcGkubGV0c2VuY3J5cHQub3JnL2FjbWUvYWNjdC8xNzEwODQ4NDMiLCAibm9uY2UiOiAiNkxNZGZXS1J2LUhTN2laejJWRktTekh6ZkpxMi1lQ0V1RnJyTEVnMG83b3ZISjdYcVRBIiwgInVybCI6ICJodHRwczovL2FjbWUtc3RhZ2luZy12MDIuYXBpLmxldHNlbmNyeXB0Lm9yZy9hY21lL2F1dGh6LXYzLzE0ODY4MjQ5MjkzIn0",
+  "signature": "EmDx5eIq8otoVA7S7gErELxy5WkDaUP6gkxeqOFZEZTWs5UAlZXJIlUfUgogADabNXFgYMiqEFWMYO8sOlJdH8KoFEDBAPbMpOcy_CAuKjLAbkgJxhbDwVCi_thcmzJz4em62Qbn3iVLcHArpfYknsA5sgZuNEJUCAIupLajk0AJxDGfr1KLeORGoWv_4Vnm1HnHfjgoZpXiE11iGRXUxA8aKSm_Kh5UMR2X1z6YjbeAC_HqPBuB4HCQhFlNhzXWIpRMJaF7XXkCyIFX4KlakJL163dGVAO1GFFRTWg53CLo8O9cMdPOTAQtpK1Ri9Ia5I3jjaWkzK4UCs-A1_iMuw",
+  "payload": ""
+}
+2024-11-12 02:02:10,707:DEBUG:urllib3.connectionpool:https://acme-staging-v02.api.letsencrypt.org:443 "POST /acme/authz-v3/14868249293 HTTP/1.1" 200 1046
+2024-11-12 02:02:10,707:DEBUG:acme.client:Received response:
+HTTP 200
+Server: nginx
+Date: Tue, 12 Nov 2024 02:02:10 GMT
+Content-Type: application/json
+Content-Length: 1046
+Connection: keep-alive
+Boulder-Requester: 171084843
+Cache-Control: public, max-age=0, no-cache
+Link: <https://acme-staging-v02.api.letsencrypt.org/directory>;rel="index"
+Replay-Nonce: 6LMdfWKRWhCzVMJKwZKp5SEGVLiL194ljzBPnTxSOfuIr58sDhc
+X-Frame-Options: DENY
+Strict-Transport-Security: max-age=604800
+
+{
+  "identifier": {
+    "type": "dns",
+    "value": "www.lucky-gun.com"
+  },
+  "status": "invalid",
+  "expires": "2024-11-19T02:02:08Z",
+  "challenges": [
+    {
+      "type": "http-01",
+      "url": "https://acme-staging-v02.api.letsencrypt.org/acme/chall-v3/14868249293/U7wyXQ",
+      "status": "invalid",
+      "validated": "2024-11-12T02:02:09Z",
+      "error": {
+        "type": "urn:ietf:params:acme:error:connection",
+        "detail": "210.109.55.157: Fetching http://www.lucky-gun.com/.well-known/acme-challenge/vnmgrVPfbaDjz-Amc70iWkw2UcaljxKdX2iBuCZU2o8: Connection refused",
+        "status": 400
+      },
+      "token": "vnmgrVPfbaDjz-Amc70iWkw2UcaljxKdX2iBuCZU2o8",
+      "validationRecord": [
+        {
+          "url": "http://www.lucky-gun.com/.well-known/acme-challenge/vnmgrVPfbaDjz-Amc70iWkw2UcaljxKdX2iBuCZU2o8",
+          "hostname": "www.lucky-gun.com",
+          "port": "80",
+          "addressesResolved": [
+            "210.109.55.157"
+          ],
+          "addressUsed": "210.109.55.157"
+        }
+      ]
+    }
+  ]
+}
+2024-11-12 02:02:10,707:DEBUG:acme.client:Storing nonce: 6LMdfWKRWhCzVMJKwZKp5SEGVLiL194ljzBPnTxSOfuIr58sDhc
+2024-11-12 02:02:10,708:INFO:certbot._internal.auth_handler:Challenge failed for domain lucky-gun.com
+2024-11-12 02:02:10,708:INFO:certbot._internal.auth_handler:Challenge failed for domain www.lucky-gun.com
+2024-11-12 02:02:10,708:INFO:certbot._internal.auth_handler:http-01 challenge for lucky-gun.com
+2024-11-12 02:02:10,708:INFO:certbot._internal.auth_handler:http-01 challenge for www.lucky-gun.com
+2024-11-12 02:02:10,708:DEBUG:certbot._internal.display.obj:Notifying user: 
+Certbot failed to authenticate some domains (authenticator: webroot). The Certificate Authority reported these problems:
+  Domain: lucky-gun.com
+  Type:   connection
+  Detail: 210.109.55.157: Fetching http://lucky-gun.com/.well-known/acme-challenge/A6CVQAMCq5S1xB1CB-K1i1R95XTRP73X5kKmpC81-HU: Connection refused
+
+  Domain: www.lucky-gun.com
+  Type:   connection
+  Detail: 210.109.55.157: Fetching http://www.lucky-gun.com/.well-known/acme-challenge/vnmgrVPfbaDjz-Amc70iWkw2UcaljxKdX2iBuCZU2o8: Connection refused
+
+Hint: The Certificate Authority failed to download the temporary challenge files created by Certbot. Ensure that the listed domains serve their content from the provided --webroot-path/-w and that files created there can be downloaded from the internet.
+
+2024-11-12 02:02:10,709:DEBUG:certbot._internal.error_handler:Encountered exception:
+Traceback (most recent call last):
+  File "/opt/certbot/src/certbot/certbot/_internal/auth_handler.py", line 108, in handle_authorizations
+    self._poll_authorizations(authzrs, max_retries, max_time_mins, best_effort)
+  File "/opt/certbot/src/certbot/certbot/_internal/auth_handler.py", line 212, in _poll_authorizations
+    raise errors.AuthorizationError('Some challenges have failed.')
+certbot.errors.AuthorizationError: Some challenges have failed.
+
+2024-11-12 02:02:10,709:DEBUG:certbot._internal.error_handler:Calling registered functions
+2024-11-12 02:02:10,709:INFO:certbot._internal.auth_handler:Cleaning up challenges
+2024-11-12 02:02:10,709:DEBUG:certbot._internal.plugins.webroot:Removing /var/www/html/.well-known/acme-challenge/A6CVQAMCq5S1xB1CB-K1i1R95XTRP73X5kKmpC81-HU
+2024-11-12 02:02:10,709:DEBUG:certbot._internal.plugins.webroot:Removing /var/www/html/.well-known/acme-challenge/vnmgrVPfbaDjz-Amc70iWkw2UcaljxKdX2iBuCZU2o8
+2024-11-12 02:02:10,709:DEBUG:certbot._internal.plugins.webroot:All challenges cleaned up
+2024-11-12 02:02:10,709:DEBUG:certbot._internal.log:Exiting abnormally:
+Traceback (most recent call last):
+  File "/usr/local/bin/certbot", line 33, in <module>
+    sys.exit(load_entry_point('certbot', 'console_scripts', 'certbot')())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/certbot/src/certbot/certbot/main.py", line 19, in main
+    return internal_main.main(cli_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/certbot/src/certbot/certbot/_internal/main.py", line 1876, in main
+    return config.func(config, plugins)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/certbot/src/certbot/certbot/_internal/main.py", line 1578, in certonly
+    lineage = _get_and_save_cert(le_client, config, domains, certname, lineage)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/certbot/src/certbot/certbot/_internal/main.py", line 142, in _get_and_save_cert
+    lineage = le_client.obtain_and_enroll_certificate(domains, certname)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/certbot/src/certbot/certbot/_internal/client.py", line 517, in obtain_and_enroll_certificate
+    cert, chain, key, _ = self.obtain_certificate(domains)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/certbot/src/certbot/certbot/_internal/client.py", line 428, in obtain_certificate
+    orderr = self._get_order_and_authorizations(csr.data, self.config.allow_subset_of_names)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/certbot/src/certbot/certbot/_internal/client.py", line 496, in _get_order_and_authorizations
+    authzr = self.auth_handler.handle_authorizations(orderr, self.config, best_effort)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/certbot/src/certbot/certbot/_internal/auth_handler.py", line 108, in handle_authorizations
+    self._poll_authorizations(authzrs, max_retries, max_time_mins, best_effort)
+  File "/opt/certbot/src/certbot/certbot/_internal/auth_handler.py", line 212, in _poll_authorizations
+    raise errors.AuthorizationError('Some challenges have failed.')
+certbot.errors.AuthorizationError: Some challenges have failed.
+2024-11-12 02:02:10,711:ERROR:certbot._internal.log:Some challenges have failed.
