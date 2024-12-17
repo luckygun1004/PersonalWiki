@@ -71,5 +71,7 @@ spec:
     tier: backend
   ports:
   - port: 80
+    nodePort: 30000
+    targetPort: 80
   type: NodePort
 
