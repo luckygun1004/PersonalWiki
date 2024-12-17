@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-deploy
+  labels:
+    php-label: php-label
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: php-deploy
+      php-label: php-label
+  template:
+    metadata:
+      labels:
+        app: php-deploy
+        php-label: php-label
+    spec:
+      containers:
+      - name: project-php
+        image: php:7.4-fpm
+        volumeMounts:
+        - name: pvc-vol
+          mountPath: /var/www/html
+          subPath: html
+      volumes:
+      - name: pvc-vol
+        persistentVolumeClaim:
+          claimName: pvc-dynamic
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: php
+  labels:
+    tier: backend
+spec:
+  selector:
+    app: php-deploy
+    php-label: php-label
+  ports:
+  - port: 9000
